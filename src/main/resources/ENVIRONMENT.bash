@@ -1,10 +1,10 @@
-export MYSQL_HOST=52.241.140.206
+export MYSQL_HOST=mysql-external.mysql56.svc.cluster.local
 export MYSQL_PORT=3306
 export MYSQL_USER=application
 export MYSQL_PASS=db3k4Cc
 export MYSQL_DATABASE=ecommerce
 
-export REDIS_HOST=52.241.140.251
+export REDIS_HOST=redis-external.redis.svc.cluster.local
 export REDIS_PORT=6379
 export REDIS_TIMEOUT=8
 export REDIS_EXPIRATION=3600

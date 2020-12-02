@@ -4,12 +4,16 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.params.SetParams;
 
+import java.util.Map;
 import java.util.Set;
 
 @Service
 public class RedisCacheUtil {
 
-    private static final int REDIS_DEFAULT_PORT = 6379;
+    private static final String DEFAULT_PORT = "6379";
+    private static final String DEFAULT_HOST = "redis-external.redis.svc.cluster.local";
+    private static final String DEFAULT_TIMEOUT = "10";
+    private static final String DEFAULT_EXPIRATION = "3600";
 
     private String host;
 
@@ -25,13 +29,15 @@ public class RedisCacheUtil {
 
     public RedisCacheUtil() {
 
-        final String timeoutSeconds = System.getenv("REDIS_TIMEOUT").trim();
+        final Map<String, String> env = System.getenv();
 
-        final String expirationSeconds = System.getenv("REDIS_EXPIRATION").trim();
+        final String timeoutSeconds = env.getOrDefault("REDIS_TIMEOUT", DEFAULT_TIMEOUT).trim();
 
-        final String portValue = System.getenv("REDIS_PORT").trim();
+        final String expirationSeconds = env.getOrDefault("REDIS_EXPIRATION", DEFAULT_EXPIRATION).trim();
 
-        this.host = System.getenv("REDIS_HOST").trim();
+        final String portValue = env.getOrDefault("REDIS_PORT", DEFAULT_PORT).trim();
+
+        this.host = env.getOrDefault("REDIS_HOST", DEFAULT_HOST).trim();
         this.port = Integer.parseInt(portValue);
 
         this.expiration = Integer.parseInt(expirationSeconds);

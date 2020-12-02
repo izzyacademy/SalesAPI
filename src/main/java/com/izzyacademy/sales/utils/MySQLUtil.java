@@ -7,7 +7,11 @@ import java.util.Map;
 public class MySQLUtil {
 
     private static final String DEFAULT_PORT = "3306";
-    private static final String DEFAULT_HOST = "localhost";
+    private static final String DEFAULT_HOST = "mysql-external.mysql56.svc.cluster.local";
+
+    private static final String DEFAULT_USER = "application";
+    private static final String DEFAULT_PASS = "db3k4Cc";
+    private static final String DEFAULT_DATABASE = "ecommerce";
 
     private final String hostname;
 
@@ -27,9 +31,9 @@ public class MySQLUtil {
 
         final String hostname = env.getOrDefault("MYSQL_HOST", DEFAULT_HOST);
         final String portNumber = env.getOrDefault("MYSQL_PORT", DEFAULT_PORT);
-        final String mysqlUser = env.getOrDefault("MYSQL_USER", "");
-        final String mysqlPass = env.getOrDefault("MYSQL_PASS", "");
-        final String mysqlBase = env.getOrDefault("MYSQL_DATABASE", "");
+        final String mysqlUser = env.getOrDefault("MYSQL_USER", DEFAULT_USER);
+        final String mysqlPass = env.getOrDefault("MYSQL_PASS", DEFAULT_PASS);
+        final String mysqlBase = env.getOrDefault("MYSQL_DATABASE", DEFAULT_DATABASE);
 
         this.hostname = hostname;
         this.port = Integer.parseInt(portNumber);
